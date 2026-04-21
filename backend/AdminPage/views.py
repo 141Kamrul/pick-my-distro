@@ -1,6 +1,55 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.http import JsonResponse
+
+from .models import Distro
+
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the admin page index.")
+    # Handle delete POST from JS helper (sends delete_id to current page)
+    if request.method == 'POST' and request.POST.get('delete_id'):
+        delete_id = request.POST.get('delete_id')
+        try:
+            d = Distro.objects.get(pk=delete_id)
+            d.delete()
+            messages.success(request, f'Distro "{d.name}" deleted.')
+        except Distro.DoesNotExist:
+            messages.error(request, 'Distro not found.')
+        return redirect('index')
+
+    distros = Distro.objects.all().order_by('-created_at')
+    context = {
+        'distros': distros,
+    }
+    return render(request, 'pages/admin_page.html', context)
+
+
+def add_distro(request):
+    if request.method == 'POST':
+        name = request.POST.get('name', '').strip()
+        description = request.POST.get('description', '').strip()
+        website = request.POST.get('website', '').strip() or None
+
+        if not name:
+            messages.error(request, 'Name is required to add a distro.')
+            # If AJAX request, respond with JSON
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'ok': False, 'error': 'Name is required'}, status=400)
+            return redirect('index')
+
+        distro = Distro.objects.create(name=name, description=description, website=website)
+        messages.success(request, f'Distro "{distro.name}" created.')
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({
+                'ok': True,
+                'distro': {
+                    'id': distro.id,
+                    'name': distro.name,
+                    'description': distro.description,
+                    'website': distro.website,
+                    'created_at': distro.created_at.isoformat(),
+                }
+            })
+        return redirect('index')
+
+    return redirect('index')
