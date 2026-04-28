@@ -65,18 +65,15 @@ def add_distro(request):
 
     return redirect('index')
 
+def delete_distro(request, distro_id):
+    try:
+        d = Distro.objects.get(pk=distro_id)
+        d.delete()
+        messages.success(request= request, message=f'Distro "{d.name}" deleted.')
 
-def list_distros(request):
-    distros = Distro.objects.all().order_by('-created_at')
-    data = []
-    for d in distros:
-        data.append({
-            'id': d.id,
-            'name': d.name,
-            'description': d.description,
-            'website': d.website,
-            'created_at': d.created_at.isoformat(),
-        })
+    except Distro.DoesNotExist:
+        messages.error(request, 'Distro not found.')
+        return redirect('index')
     
-    return JsonResponse({'distros': data})
+    return JsonResponse({'ok': True})
 

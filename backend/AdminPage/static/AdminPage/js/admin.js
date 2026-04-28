@@ -1,5 +1,4 @@
-// AdminPage static JS
-// Unobtrusive handlers for admin page
+
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('AdminPage admin.js loaded, DOMContentLoaded');
@@ -16,39 +15,59 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Helper to bind action handlers for buttons inside a container
-  function bindActionHandlers(container) {
+  function bindActionHandlers(container) 
+  {
     container = container || document;
-    container.querySelectorAll('button[data-action]').forEach(function (btn) {
-      if (btn._adminBound) return;
+    container.querySelectorAll('button[data-action]').forEach(function (btn) 
+    {
+      if (btn._adminBound) 
+        return;
       btn._adminBound = true;
-      btn.addEventListener('click', function (e) {
+      btn.addEventListener('click', function (e) 
+      {
         var action = btn.getAttribute('data-action');
         var id = btn.getAttribute('data-id');
-        if (action === 'delete') {
-          if (confirm('Are you sure you want to delete this distro?')) {
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '';
-            var csrfInput = document.querySelector('#csrf-form input[name=csrfmiddlewaretoken]') || document.querySelector('input[name=csrfmiddlewaretoken]');
-            var csrf = csrfInput;
-            if (csrf) {
-              var token = document.createElement('input');
-              token.type = 'hidden';
-              token.name = 'csrfmiddlewaretoken';
-              token.value = csrf.value;
-              form.appendChild(token);
-            }
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'delete_id';
-            input.value = id;
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
-          }
-        } else if (action === 'edit') {
+        if (action === 'delete') 
+        {
+            Swal.fire({
+              title: 'Delete Distro?',
+              text: 'This action cannot be undone.',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#dc3545',
+              cancelButtonColor: '#6c757d',
+              confirmButtonText: 'Yes, delete it!'
+            }).then(function(result) {
+              if (result.isConfirmed) {
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '';
+                var csrfInput = document.querySelector('#csrf-form input[name=csrfmiddlewaretoken]') || document.querySelector('input[name=csrfmiddlewaretoken]');
+                var csrf = csrfInput;
+                if (csrf) 
+                {
+                  var token = document.createElement('input');
+                  token.type = 'hidden';
+                  token.name = 'csrfmiddlewaretoken';
+                  token.value = csrf.value;
+                  form.appendChild(token);
+                }
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'delete_id';
+                input.value = id;
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+              }
+            });
+        } 
+        else if (action === 'edit') 
+        {
           alert('Edit distro ' + id + ' (not implemented yet)');
-        } else if (action === 'details') {
+        } 
+        else if (action === 'details') 
+        {
           alert('View details for distro ' + id + ' (not implemented yet)');
         }
       });

@@ -71,3 +71,67 @@ INFO 2026-04-21 16:15:24,062 autoreload 17475 140716781521856 Watching for file 
 WARNING 2026-04-21 16:15:26,844 log 17475 140716492670656 Not Found: /.well-known/appspecific/com.chrome.devtools.json
 INFO 2026-04-28 14:02:00,082 autoreload 8325 139633510587328 Watching for file changes with StatReloader
 WARNING 2026-04-28 14:02:38,756 log 8325 139633221760704 Not Found: /favicon.ico
+INFO 2026-04-28 14:03:39,823 autoreload 8325 139633510587328 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:03:40,240 autoreload 8648 139684691434432 Watching for file changes with StatReloader
+INFO 2026-04-28 14:03:47,406 autoreload 8648 139684691434432 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:03:47,899 autoreload 8685 140054100732864 Watching for file changes with StatReloader
+INFO 2026-04-28 14:03:50,065 autoreload 8685 140054100732864 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:03:50,437 autoreload 8691 140146509798336 Watching for file changes with StatReloader
+INFO 2026-04-28 14:03:52,536 autoreload 8691 140146509798336 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:03:53,130 autoreload 8708 140605179890624 Watching for file changes with StatReloader
+INFO 2026-04-28 14:03:56,264 autoreload 8708 140605179890624 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:03:56,695 autoreload 8722 139928536071104 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:00,849 autoreload 8722 139928536071104 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:01,400 autoreload 8742 140492242222016 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:03,496 autoreload 8742 140492242222016 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:03,981 autoreload 8750 140411927346112 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:07,099 autoreload 8750 140411927346112 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:07,529 autoreload 8771 139707080358848 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:11,667 autoreload 8771 139707080358848 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:12,046 autoreload 8796 140261773097920 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:17,155 autoreload 8796 140261773097920 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:17,577 autoreload 8823 139626877660096 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:25,725 autoreload 8823 139626877660096 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:26,155 autoreload 8844 139888444693440 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:33,273 autoreload 8844 139888444693440 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:33,627 autoreload 8882 140365835873216 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:36,726 autoreload 8882 140365835873216 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:37,140 autoreload 8896 140012295732160 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:39,231 autoreload 8896 140012295732160 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:39,573 autoreload 8915 140182502771648 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:41,679 autoreload 8915 140182502771648 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:42,112 autoreload 8930 140294981962688 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:46,222 autoreload 8930 140294981962688 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:46,651 autoreload 8942 140666623904704 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:48,753 autoreload 8942 140666623904704 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:49,088 autoreload 8959 139694480522176 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:52,190 autoreload 8959 139694480522176 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:52,636 autoreload 8975 139699593624512 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:53,756 autoreload 8975 139699593624512 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:54,120 autoreload 8983 140692318387136 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:56,251 autoreload 8983 140692318387136 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:56,636 autoreload 8989 140117909072832 Watching for file changes with StatReloader
+INFO 2026-04-28 14:04:58,771 autoreload 8989 140117909072832 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:04:59,140 autoreload 9007 140330106600384 Watching for file changes with StatReloader
+INFO 2026-04-28 14:05:01,271 autoreload 9007 140330106600384 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:05:01,632 autoreload 9013 139925618150336 Watching for file changes with StatReloader
+INFO 2026-04-28 14:05:04,802 autoreload 9013 139925618150336 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:05:05,237 autoreload 9030 139896931576768 Watching for file changes with StatReloader
+INFO 2026-04-28 14:05:07,383 autoreload 9030 139896931576768 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:05:07,776 autoreload 9055 140093048470464 Watching for file changes with StatReloader
+INFO 2026-04-28 14:05:08,905 autoreload 9055 140093048470464 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/views.py changed, reloading.
+INFO 2026-04-28 14:05:09,314 autoreload 9063 140650952592320 Watching for file changes with StatReloader
+INFO 2026-04-28 14:05:40,665 autoreload 9063 140650952592320 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/urls.py changed, reloading.
+INFO 2026-04-28 14:05:41,137 autoreload 9148 140010268048320 Watching for file changes with StatReloader
+INFO 2026-04-28 14:05:44,267 autoreload 9148 140010268048320 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/urls.py changed, reloading.
+INFO 2026-04-28 14:05:44,663 autoreload 9169 139852659133376 Watching for file changes with StatReloader
+INFO 2026-04-28 14:05:51,784 autoreload 9169 139852659133376 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/urls.py changed, reloading.
+INFO 2026-04-28 14:05:52,171 autoreload 9191 140099045178304 Watching for file changes with StatReloader
+INFO 2026-04-28 14:06:04,337 autoreload 9191 140099045178304 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/urls.py changed, reloading.
+INFO 2026-04-28 14:06:04,826 autoreload 9241 139908220402624 Watching for file changes with StatReloader
+INFO 2026-04-28 14:06:09,945 autoreload 9241 139908220402624 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/urls.py changed, reloading.
+INFO 2026-04-28 14:06:10,315 autoreload 9278 140580085062592 Watching for file changes with StatReloader
+INFO 2026-04-28 14:06:16,468 autoreload 9278 140580085062592 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/urls.py changed, reloading.
+INFO 2026-04-28 14:06:16,827 autoreload 9311 140081162632128 Watching for file changes with StatReloader
+INFO 2026-04-28 14:06:21,983 autoreload 9311 140081162632128 /home/winnoer/Documents/Projects/App/pick-my-distro/backend/AdminPage/urls.py changed, reloading.
+INFO 2026-04-28 14:06:22,352 autoreload 9332 139836701236160 Watching for file changes with StatReloader
