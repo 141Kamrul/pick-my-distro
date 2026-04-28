@@ -59,7 +59,7 @@
 <div class="modal fade" id="addDistroModal" tabindex="-1" aria-labelledby="addDistroModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-      <form method="post" action="{% url 'add_distro' %}">
+      <form method="post">
         {% csrf_token %}
         <div class="modal-header">
           <h5 class="modal-title" id="addDistroModalLabel">Add Distro</h5>

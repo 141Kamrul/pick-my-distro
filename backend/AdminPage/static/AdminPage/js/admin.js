@@ -2,6 +2,7 @@
 // Unobtrusive handlers for admin page
 
 document.addEventListener('DOMContentLoaded', function () {
+  console.log('AdminPage admin.js loaded, DOMContentLoaded');
   // Confirm deletes (in case inline onclick is removed later)
   document.querySelectorAll('form[action*="delete_distro"] button, button.delete-confirm').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
@@ -14,43 +15,51 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Handle action buttons (edit/details/delete) with data-action/data-id
-  document.querySelectorAll('button[data-action]').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      var action = btn.getAttribute('data-action');
-      var id = btn.getAttribute('data-id');
-      if (action === 'delete') {
-        if (confirm('Are you sure you want to delete this distro?')) {
-          // For now perform a simple POST to the current page with delete_id
-          var form = document.createElement('form');
-          form.method = 'POST';
-          form.action = '';
-          // Prefer explicit hidden csrf form if present
-          var csrfInput = document.querySelector('#csrf-form input[name=csrfmiddlewaretoken]') || document.querySelector('input[name=csrfmiddlewaretoken]');
-          var csrf = csrfInput;
-          if (csrf) {
-            var token = document.createElement('input');
-            token.type = 'hidden';
-            token.name = 'csrfmiddlewaretoken';
-            token.value = csrf.value;
-            form.appendChild(token);
+  // Helper to bind action handlers for buttons inside a container
+  function bindActionHandlers(container) {
+    container = container || document;
+    container.querySelectorAll('button[data-action]').forEach(function (btn) {
+      if (btn._adminBound) return;
+      btn._adminBound = true;
+      btn.addEventListener('click', function (e) {
+        var action = btn.getAttribute('data-action');
+        var id = btn.getAttribute('data-id');
+        if (action === 'delete') {
+          if (confirm('Are you sure you want to delete this distro?')) {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '';
+            var csrfInput = document.querySelector('#csrf-form input[name=csrfmiddlewaretoken]') || document.querySelector('input[name=csrfmiddlewaretoken]');
+            var csrf = csrfInput;
+            if (csrf) {
+              var token = document.createElement('input');
+              token.type = 'hidden';
+              token.name = 'csrfmiddlewaretoken';
+              token.value = csrf.value;
+              form.appendChild(token);
+            }
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'delete_id';
+            input.value = id;
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
           }
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = 'delete_id';
-          input.value = id;
-          form.appendChild(input);
-          document.body.appendChild(form);
-          form.submit();
+        } else if (action === 'edit') {
+          alert('Edit distro ' + id + ' (not implemented yet)');
+        } else if (action === 'details') {
+          alert('View details for distro ' + id + ' (not implemented yet)');
         }
-      } else if (action === 'edit') {
-        // Place-holder: open modal or navigate to edit page
-        alert('Edit distro ' + id + ' (not implemented yet)');
-      } else if (action === 'details') {
-        alert('View details for distro ' + id + ' (not implemented yet)');
-      }
+      });
     });
-  });
+  }
+
+  function attachRowHover(tr) {
+    if (!tr) return;
+    tr.addEventListener('mouseenter', function () { tr.classList.add('table-active'); });
+    tr.addEventListener('mouseleave', function () { tr.classList.remove('table-active'); });
+  }
 
   // Intercept add-distro modal form and submit via AJAX
   var addForm = document.querySelector('#addDistroModal form');
@@ -58,15 +67,22 @@ document.addEventListener('DOMContentLoaded', function () {
     addForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var form = e.target;
-      var action = form.action || window.location.href;
+      // If form has no action, compute endpoint as current path + 'add/'
+      var action = form.getAttribute('action');
+      if (!action) {
+        action = window.location.pathname.replace(/\/$/, '') + '/add/';
+      }
       var formData = new FormData(form);
 
       var csrfInput = document.querySelector('#csrf-form input[name=csrfmiddlewaretoken]') || document.querySelector('input[name=csrfmiddlewaretoken]');
       var csrf = csrfInput ? csrfInput.value : null;
 
+      var headers = { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
+      if (csrf) headers['X-CSRFToken'] = csrf;
+
       fetch(action, {
         method: 'POST',
-        headers: csrf ? { 'X-CSRFToken': csrf, 'Accept': 'application/json' } : { 'Accept': 'application/json' },
+        headers: headers,
         body: formData,
         credentials: 'same-origin'
       }).then(function (res) {
@@ -97,14 +113,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<button class="btn btn-sm btn-outline-info me-1" data-action="details" data-id="' + d.id + '">Details</button>' +
                 '<button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="' + d.id + '">Delete</button>' +
               '</td>';
-            tbody.insertBefore(tr, tbody.firstChild);
-
-            // Re-bind action handlers for the new buttons
-            tr.querySelectorAll('button[data-action]').forEach(function (btn) {
-              btn.addEventListener('click', function (e) {
-                btn.dispatchEvent(new Event('click'));
-              });
-            });
+              tbody.insertBefore(tr, tbody.firstChild);
+              // Bind action handlers and hover for the new row
+              bindActionHandlers(tr);
+              attachRowHover(tr);
           }
 
           // Optionally show a temporary alert
@@ -118,6 +130,47 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+
+  // Load existing distros via AJAX and render rows entirely in JS
+  (function loadDistros() {
+    console.log('loadDistros: starting');
+    var listEndpoint = window.location.pathname.replace(/\/$/, '') + '/api/distros/';
+    fetch(listEndpoint, 
+      { 
+        headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }, credentials: 'same-origin' })
+      .then(function (res) 
+      { 
+        console.log('Fetch distros response:', res);
+        return res.json(); 
+      })
+      .then(function (data) 
+      {
+        if (!data || !Array.isArray(data.distros)) 
+          return;
+        var tbody = document.querySelector('table.table tbody');
+        if (!tbody) 
+          return;
+        data.distros.forEach(function (d) 
+        {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + escapeHtml(d.name) + '</td>' +
+            '<td class="text-truncate" style="max-width:40ch;">' + escapeHtml(d.description || '—') + '</td>' +
+            '<td>' + (d.website ? ('<a href="' + escapeAttr(d.website) + '" target="_blank" rel="noopener">' + escapeHtml(d.website) + '</a>') : '—') + '</td>' +
+            '<td>' + (new Date(d.created_at)).toISOString().slice(0,10) + '</td>' +
+            '<td class="text-end">' +
+              '<button class="btn btn-sm btn-outline-secondary me-1" data-action="edit" data-id="' + d.id + '">Edit</button>' +
+              '<button class="btn btn-sm btn-outline-info me-1" data-action="details" data-id="' + d.id + '">Details</button>' +
+              '<button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="' + d.id + '">Delete</button>' +
+            '</td>';
+          tbody.appendChild(tr);
+          bindActionHandlers(tr);
+          attachRowHover(tr);
+        });
+      }).catch(function (err) 
+      {
+        console.warn('Failed to load distros:', err);
+      });
+  })();
 
   // Simple row highlight on hover (visual aid)
   document.querySelectorAll('table.table tr').forEach(function (tr) {

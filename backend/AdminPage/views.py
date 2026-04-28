@@ -4,9 +4,21 @@ from django.http import JsonResponse
 
 from .models import Distro
 
+def get_distros(request):
+    distros =  Distro.objects.all().order_by('-created_at')
+    distros_data = []
+    for  distro  in  distros:
+        distros_data.append({
+            'id': distro.id,
+            'name': distro.name,
+            'description': distro.description,
+            'website':  distro.website,
+            'created_at':  distro.created_at.isoformat(),
+        })
+    
+    return JsonResponse({'distros':  distros_data})
 
 def index(request):
-    # Handle delete POST from JS helper (sends delete_id to current page)
     if request.method == 'POST' and request.POST.get('delete_id'):
         delete_id = request.POST.get('delete_id')
         try:
@@ -32,7 +44,6 @@ def add_distro(request):
 
         if not name:
             messages.error(request, 'Name is required to add a distro.')
-            # If AJAX request, respond with JSON
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'ok': False, 'error': 'Name is required'}, status=400)
             return redirect('index')
@@ -53,3 +64,19 @@ def add_distro(request):
         return redirect('index')
 
     return redirect('index')
+
+
+def list_distros(request):
+    distros = Distro.objects.all().order_by('-created_at')
+    data = []
+    for d in distros:
+        data.append({
+            'id': d.id,
+            'name': d.name,
+            'description': d.description,
+            'website': d.website,
+            'created_at': d.created_at.isoformat(),
+        })
+    
+    return JsonResponse({'distros': data})
+

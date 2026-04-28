@@ -37,6 +37,17 @@ argon2 = ["argon2-cffi (>=23.1.0)"]
 bcrypt = ["bcrypt (>=4.1.1)"]
 
 [[package]]
+name = "django-pdb"
+version = "0.6.2"
+description = "Easier pdb debugging for Django"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "django-pdb-0.6.2.tar.gz", hash = "sha256:eb8f4ed1a7f2b9c67944414688fd39a6f38f410dd7461d417512d72359f0472d"},
+]
+
+[[package]]
 name = "mysqlclient"
 version = "2.2.8"
 description = "Python interface to MySQL"
@@ -97,4 +108,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "f6f7aa132734d20e43ff9a528fe2c9587024e8805a723efaa4e0c74a904873b1"
+content-hash = "b7f0cba1b2215f97b304c8b0b77925ad2ada928d7a363dc6548607035cefce6f"
